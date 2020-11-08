@@ -46,7 +46,7 @@ class Messages(Resource):
         message = MessageModel(data['senderId'],
                                data['receiverId'],
                                data['content'],
-                               datetime.now())
+                               datetime.utcnow())
         message.save_to_db()
 
         return message.json(), 201

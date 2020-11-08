@@ -36,5 +36,5 @@ class MessageModel(db.Model):
             'senderId': self.sender_id,
             'receiverId': self.receiver_id,
             'content': self.content,
-            'creationDate': self.creation_date.strftime('%c')
+            'creationDate': self.creation_date.strftime('%c UTC')
         }
