@@ -1,21 +1,28 @@
 import os
 from flask import Flask
-from flask_restful import Api
 from flask_cors import CORS
+from flask_restful import Api
+from flask_jwt_extended import JWTManager
 
 from resources.message import Messages
-from resources.user import Users
+from resources.user import Users, SignIn
 
 
 app = Flask(__name__)
+
 CORS(app)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+app.config['JWT_SECRET_KEY'] = 'chat-app'
+jwt = JWTManager(app)
 
 api = Api(app)
 
 api.add_resource(Messages, '/messages')
 api.add_resource(Users, '/users')
+api.add_resource(SignIn, '/signin')
 
 
 @app.before_first_request

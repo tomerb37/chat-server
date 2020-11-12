@@ -24,11 +24,10 @@ class MessageModel(db.Model):
 
     @classmethod
     def get_chat_messages(cls, sender_id, receiver_id):
-        sender_messages = cls.query.filter_by(sender_id=sender_id, receiver_id=receiver_id).all()
-        receiver_messages = cls.query.filter_by(sender_id=receiver_id, receiver_id=sender_id).all()
-        messages = [message.json() for message in sender_messages]
-        messages.extend([message.json() for message in receiver_messages])
-        return sorted(messages, key=lambda x: x['id'])
+        messages = cls.query.filter(
+            ((cls.sender_id == sender_id) & (cls.receiver_id == receiver_id)) |
+            (cls.sender_id == receiver_id) & (cls.receiver_id == sender_id)).all()
+        return messages
     
     def json(self):
         return {
