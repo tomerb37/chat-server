@@ -1,3 +1,4 @@
+import consts
 from db import db
 
 
@@ -31,9 +32,9 @@ class MessageModel(db.Model):
     
     def json(self):
         return {
-            'id': self.message_id,
-            'senderId': self.sender_id,
-            'receiverId': self.receiver_id,
-            'content': self.content,
-            'creationDate': self.creation_date.strftime('%c UTC')
+            consts.MESSAGE_ID: self.message_id,
+            consts.SENDER_ID: self.sender_id,
+            consts.RECEIVER_ID: self.receiver_id,
+            consts.CONTENT: self.content,
+            consts.CREATION_DATE: self.creation_date.strftime('%c UTC')
         }

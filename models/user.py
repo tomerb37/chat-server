@@ -1,3 +1,4 @@
+import consts
 from db import db
 
 
@@ -34,6 +35,6 @@ class UserModel(db.Model):
 
     def json(self):
         return {
-            'userId': self.user_id,
-            'nickname': self.nickname
+            consts.USER_ID: self.user_id,
+            consts.NICKNAME: self.nickname
         }
